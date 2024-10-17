@@ -1,7 +1,7 @@
 package Main;
 
-import Utlity.BaseDriver;
-import Utlity.Tools;
+import Utility.BaseDriver;
+import Utility.Tools;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
