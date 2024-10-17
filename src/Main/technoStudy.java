@@ -8,6 +8,8 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.util.Set;
+
 
 public class technoStudy extends BaseDriver {
 
@@ -176,6 +178,45 @@ public class technoStudy extends BaseDriver {
         elements.logo.click();
 
     }
+    @Test(enabled = true)
+    public void Test7() {
+        Elements elements = new Elements();
+        elements.courses.click();
+        elements.sdet.click();
+        Assert.assertTrue(elements.text.isDisplayed());
+
+
+    }
+
+
+    @Test(enabled = true)
+    public void Test8() {
+        Elements elements = new Elements();
+
+        elements.bilgiAlin.click();
+        Actions actions = new Actions(driver);
+        actions.scrollToElement(elements.gonder);
+
+
+        elements.okudumKabulEdiyorum.click();
+
+        String orjinalWindow = driver.getWindowHandle();
+
+
+        Set<String> allwindow = driver.getWindowHandles();
+
+        for (String windowHandle : allwindow) {
+            if (!windowHandle.equals(orjinalWindow)) {
+                driver.switchTo().window(windowHandle);
+                break;
+            }
+            elements.campusLogin.click();
+            Assert.assertTrue(elements.kullanimSartlariGoruntulenme.isDisplayed());
+
+
+        }
+    }
+
 }
 
 
