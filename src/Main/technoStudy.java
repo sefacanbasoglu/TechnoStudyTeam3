@@ -2,19 +2,24 @@ package Main;
 
 import Utlity.BaseDriver;
 import Utlity.Tools;
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.Set;
 
 
 public class technoStudy extends BaseDriver {
 
     @Test
-    public void Test_US_1() {
+    public void Test_US_1() throws IOException {
 
         Elements elements = new Elements();
 
@@ -25,14 +30,26 @@ public class technoStudy extends BaseDriver {
             wait.until(ExpectedConditions.elementToBeClickable(elements.courses)).click();
             wait.until(ExpectedConditions.elementToBeClickable(elements.coursesList.get(i))).click();
             Assert.assertTrue(elements.coursesList.get(i).isEnabled(), "Kurs bulunamadi");
+
+            TakesScreenshot ts= (TakesScreenshot) driver;
+            File shot=new File("target/screnshott/incorectSystem.jpg");
+            File picture=ts.getScreenshotAs(OutputType.FILE);
+            FileUtils.copyFile(picture,shot);
+
+
         }
     }
 
     @Test(enabled = false)
-    public void Test_US_2() {
+    public void Test_US_2() throws IOException {
         Elements elements = new Elements();
         wait.until(ExpectedConditions.elementToBeClickable(elements.campusLogin)).click();
         Assert.assertTrue(elements.loginButton.isDisplayed());
+
+        TakesScreenshot ts= (TakesScreenshot) driver;
+        File shot=new File("target/screnshott/sayfa1.jpg");
+        File picture=ts.getScreenshotAs(OutputType.FILE);
+        FileUtils.copyFile(picture,shot);
 
     }
 
@@ -70,7 +87,7 @@ public class technoStudy extends BaseDriver {
     }
 
     @Test(enabled = true)
-    public void Test4() {
+    public void Test4() throws IOException {
 
         Elements elements = new Elements();
 
@@ -84,6 +101,11 @@ public class technoStudy extends BaseDriver {
 
             Assert.assertTrue(elements.coursesList.get(i).isEnabled(), "Kurs sayfası açılmadı : " + elements.coursesList.get(i).getText());
 
+            TakesScreenshot ts= (TakesScreenshot) driver;
+            File shot=new File("target/screnshott/sayfa2.jpg");
+            File picture=ts.getScreenshotAs(OutputType.FILE);
+            FileUtils.copyFile(picture,shot);
+
         }
 
 
@@ -92,12 +114,7 @@ public class technoStudy extends BaseDriver {
     @Test
     public void Test5() {
 
-        //        Test Case 5: Submenu Social Media
-//        1. Web sitesinin alt menüsünde "Sosyal Medya" hesaplarına ulaşabileceğim bir alan
-//        bulunmalıdır.
-//        2. Her sosyal medya hesabının adı ve/veya simgesi görünmelidir.
-//        3. İstediğim bir sosyal medya hesabına tıkladığımda, ilgili sosyal medya sayfası veya profil
-//        açılmalıdır.
+
 
         Elements elements = new Elements();
 
@@ -179,18 +196,21 @@ public class technoStudy extends BaseDriver {
 
     }
     @Test(enabled = true)
-    public void Test7() {
+    public void Test7()  {
         Elements elements = new Elements();
         elements.courses.click();
         elements.sdet.click();
         Assert.assertTrue(elements.text.isDisplayed());
 
 
+
+
+
     }
 
 
     @Test(enabled = true)
-    public void Test8() {
+    public void Test8()  {
         Elements elements = new Elements();
 
         elements.bilgiAlin.click();
@@ -212,6 +232,8 @@ public class technoStudy extends BaseDriver {
             }
             elements.campusLogin.click();
             Assert.assertTrue(elements.kullanimSartlariGoruntulenme.isDisplayed());
+
+
 
 
         }

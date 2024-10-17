@@ -105,11 +105,7 @@ public class Elements {
     public WebElement yenihasap;
 
 
-//    @FindBy(css = "[aria-label='name']")
-//    public WebElement nameSurnameInput;
-//
-//    @FindBy(css = "[aria-label='name']")
-//    public WebElement nameSurnameInput;
+
 
 
 }
