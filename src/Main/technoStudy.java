@@ -1,6 +1,7 @@
 package Main;
 
 import Utlity.BaseDriver;
+import Utlity.BaseDriverParameter;
 import Utlity.Tools;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
@@ -9,6 +10,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import java.io.File;
@@ -31,10 +33,10 @@ public class technoStudy extends BaseDriver {
             wait.until(ExpectedConditions.elementToBeClickable(elements.coursesList.get(i))).click();
             Assert.assertTrue(elements.coursesList.get(i).isEnabled(), "Kurs bulunamadi");
 
-            TakesScreenshot ts= (TakesScreenshot) driver;
-            File shot=new File("target/screnshott/incorectSystem.jpg");
-            File picture=ts.getScreenshotAs(OutputType.FILE);
-            FileUtils.copyFile(picture,shot);
+            TakesScreenshot ts = (TakesScreenshot) driver;
+            File shot = new File("target/screnshott/incorectSystem.jpg");
+            File picture = ts.getScreenshotAs(OutputType.FILE);
+            FileUtils.copyFile(picture, shot);
 
 
         }
@@ -46,26 +48,26 @@ public class technoStudy extends BaseDriver {
         wait.until(ExpectedConditions.elementToBeClickable(elements.campusLogin)).click();
         Assert.assertTrue(elements.loginButton.isDisplayed());
 
-        TakesScreenshot ts= (TakesScreenshot) driver;
-        File shot=new File("target/screnshott/sayfa1.jpg");
-        File picture=ts.getScreenshotAs(OutputType.FILE);
-        FileUtils.copyFile(picture,shot);
+        TakesScreenshot ts = (TakesScreenshot) driver;
+        File shot = new File("target/screnshott/sayfa1.jpg");
+        File picture = ts.getScreenshotAs(OutputType.FILE);
+        FileUtils.copyFile(picture, shot);
 
     }
 
-    @Test(enabled = true)
-    public void Test3() {
+    @Test(dataProvider = "getData")
+    public void Test3(String name, String mail, String phoneNumber, String age, String job) {
         Elements elements = new Elements();
 
 
         elements.basvur.click();
-        elements.nameSurnameInput.sendKeys("testyusuf ucucu");
-        elements.email.sendKeys("test_team@gmail.com");
-        elements.phoneNumberInput.sendKeys("5212102121");
-        elements.age.sendKeys("22");
+        elements.nameSurnameInput.sendKeys(name);
+        elements.email.sendKeys(mail);
+        elements.phoneNumberInput.sendKeys(phoneNumber);
+        elements.age.sendKeys(age);
 
-        elements.job.sendKeys("QA Enginner");
-
+        elements.job.sendKeys(job);
+        Tools.Sleep(5);
 
         Select select = new Select(elements.egitimDurumu);
         select.selectByValue("Üniversite");
@@ -83,8 +85,15 @@ public class technoStudy extends BaseDriver {
         elements.okudumKabulEdiyorum.click();
 
         elements.gonder.click();
-
     }
+
+    @DataProvider
+    Object[][] getData() {
+        Object[][] data = {
+                {"Test Team3", "test_team@gmail.com", "5212102121", "22", "QA Enginner"}};
+        return data;
+    }
+
 
     @Test(enabled = true)
     public void Test4() throws IOException {
@@ -97,14 +106,14 @@ public class technoStudy extends BaseDriver {
 
             wait.until(ExpectedConditions.elementToBeClickable(elements.coursesList.get(i))).click();
 
-            Tools.Sleep(3);
+
 
             Assert.assertTrue(elements.coursesList.get(i).isEnabled(), "Kurs sayfası açılmadı : " + elements.coursesList.get(i).getText());
 
-            TakesScreenshot ts= (TakesScreenshot) driver;
-            File shot=new File("target/screnshott/sayfa2.jpg");
-            File picture=ts.getScreenshotAs(OutputType.FILE);
-            FileUtils.copyFile(picture,shot);
+            TakesScreenshot ts = (TakesScreenshot) driver;
+            File shot = new File("target/screnshott/sayfa2.jpg");
+            File picture = ts.getScreenshotAs(OutputType.FILE);
+            FileUtils.copyFile(picture, shot);
 
         }
 
@@ -113,7 +122,6 @@ public class technoStudy extends BaseDriver {
 
     @Test
     public void Test5() {
-
 
 
         Elements elements = new Elements();
@@ -125,7 +133,6 @@ public class technoStudy extends BaseDriver {
         actions.moveToElement(elements.facebookIcon).perform();
 
         elements.facebookIcon.click();
-        Tools.Sleep(3);
 
         String currentUrl = driver.getCurrentUrl();
 
@@ -133,44 +140,42 @@ public class technoStudy extends BaseDriver {
 
         // Anasayfaya
         driver.navigate().back();
-        Tools.Sleep(3);
 
         // Instagram
         actions.moveToElement(elements.instagramIcon).perform();
 
         elements.instagramIcon.click();
-        Tools.Sleep(3);
+
 
         currentUrl = driver.getCurrentUrl();
         Assert.assertTrue(currentUrl.contains("instagram.com"), "Instagram linki doğru açılmadı!");
 
         // Anasayfaya
         driver.navigate().back();
-        Tools.Sleep(3);
+
 
         // LinkedIn
         actions.moveToElement(elements.linkedlnIcon).perform();
         elements.linkedlnIcon.click();
-        Tools.Sleep(3);
+
 
         currentUrl = driver.getCurrentUrl();
         Assert.assertTrue(currentUrl.contains("linkedin.com"), "LinkedIn linki doğru açılmadı!");
 
         // Anasayfaya
         driver.navigate().back();
-        Tools.Sleep(3);
+
 
         //Youtube
         actions.moveToElement(elements.youtubeIcon).perform();
         elements.youtubeIcon.click();
-        Tools.Sleep(3);
+
 
         currentUrl = driver.getCurrentUrl();
         Assert.assertTrue(currentUrl.contains("youtube.com"), "Youtube linki doğru açılmadı!");
 
         // Anasayfaya
         driver.navigate().back();
-        Tools.Sleep(3);
 
 
     }
@@ -195,22 +200,20 @@ public class technoStudy extends BaseDriver {
         elements.logo.click();
 
     }
+
     @Test(enabled = true)
-    public void Test7()  {
+    public void Test7() {
         Elements elements = new Elements();
         elements.courses.click();
         elements.sdet.click();
         Assert.assertTrue(elements.text.isDisplayed());
 
 
-
-
-
     }
 
 
     @Test(enabled = true)
-    public void Test8()  {
+    public void Test8() {
         Elements elements = new Elements();
 
         elements.bilgiAlin.click();
@@ -234,14 +237,12 @@ public class technoStudy extends BaseDriver {
             Assert.assertTrue(elements.kullanimSartlariGoruntulenme.isDisplayed());
 
 
-
-
         }
     }
 
 }
 
-//ekleme deneme
+
 
 
 
