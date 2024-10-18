@@ -2,9 +2,9 @@
 This repository contains the Test Automation Project for Techno Study, focusing on web application testing using TestNG. The aim of the project is to test various functionalities of the Techno Study website.
 
 # Team Members
-Yusuf Ucucu
-Sefacan Başoğlu
-Betül Gözlükoğlu
+Yusuf Ucucu,
+Sefacan Başoğlu,
+Betül Gözlükoğlu,
 İlknur Neşe Tuncal
 
 # Project Overview
