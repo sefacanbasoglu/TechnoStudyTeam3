@@ -1,18 +1,24 @@
 package Main;
 
 import Utility.BaseDriver;
+import Utility.BaseDriverParametres;
 import Utility.Tools;
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.Set;
 
 
 public class technoStudy extends BaseDriver {
-
     @Test
     public void Test_US_1() {
 
@@ -28,7 +34,7 @@ public class technoStudy extends BaseDriver {
         }
     }
 
-    @Test(enabled = false)
+    @Test(enabled = true)
     public void Test_US_2() {
         Elements elements = new Elements();
         wait.until(ExpectedConditions.elementToBeClickable(elements.campusLogin)).click();
@@ -36,41 +42,50 @@ public class technoStudy extends BaseDriver {
 
     }
 
+
+@Test(dataProvider = "getData")
+public void Test3(String name, String mail, String phoneNumber, String age, String job) {
+    Elements elements = new Elements();
+
+
+    elements.basvur.click();
+    elements.nameSurnameInput.sendKeys(name);
+    elements.email.sendKeys(mail);
+    elements.phoneNumberInput.sendKeys(phoneNumber);
+    elements.age.sendKeys(age);
+
+    elements.job.sendKeys(job);
+
+
+    Select select = new Select(elements.egitimDurumu);
+    select.selectByValue("Üniversite");
+
+    Select select1 = new Select(elements.ulke);
+    select1.selectByVisibleText("Algeria");
+
+    Select select2 = new Select(elements.kurs);
+    select2.selectByValue("Job Center & Arbeitsamt");
+
+    Select select3 = new Select(elements.biziNeredenDuydun);
+    select3.selectByValue("Instagram");
+
+    elements.promo.sendKeys("TestTeam3dh");
+    elements.okudumKabulEdiyorum.click();
+
+    elements.gonder.click();
+}
+
+@DataProvider
+Object[][] getData() {
+    Object[][] data = {
+            {"Test Team3", "test_team@gmail.com", "5212102121", "22", "QA Enginner"}};
+    return data;
+}
+
+
+
     @Test(enabled = true)
-    public void Test3() {
-        Elements elements = new Elements();
-
-
-        elements.basvur.click();
-        elements.nameSurnameInput.sendKeys("testyusuf ucucu");
-        elements.email.sendKeys("test_team@gmail.com");
-        elements.phoneNumberInput.sendKeys("5212102121");
-        elements.age.sendKeys("22");
-
-        elements.job.sendKeys("QA Enginner");
-
-
-        Select select = new Select(elements.egitimDurumu);
-        select.selectByValue("Üniversite");
-
-        Select select1 = new Select(elements.ulke);
-        select1.selectByVisibleText("Algeria");
-
-        Select select2 = new Select(elements.kurs);
-        select2.selectByValue("Job Center & Arbeitsamt");
-
-        Select select3 = new Select(elements.biziNeredenDuydun);
-        select3.selectByValue("Instagram");
-
-        elements.promo.sendKeys("TestTeam3dh");
-        elements.okudumKabulEdiyorum.click();
-
-        elements.gonder.click();
-
-    }
-
-    @Test(enabled = true)
-    public void Test4() {
+    public void Test4() throws IOException {
 
         Elements elements = new Elements();
 
@@ -83,9 +98,12 @@ public class technoStudy extends BaseDriver {
             Tools.Sleep(3);
 
             Assert.assertTrue(elements.coursesList.get(i).isEnabled(), "Kurs sayfası açılmadı : " + elements.coursesList.get(i).getText());
+            TakesScreenshot ts= (TakesScreenshot) driver;
+            File shot=new File("target/screnshott/sayfa2.jpg");
+            File picture=ts.getScreenshotAs(OutputType.FILE);
+            FileUtils.copyFile(picture,shot);
 
         }
-
 
     }
 

@@ -1,6 +1,6 @@
 package Main;
 
-import Utility.BaseDriver;
+import Utility.BaseDriverParametres;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -9,7 +9,7 @@ import java.util.List;
 public class Elements {
     public Elements() {
 
-        PageFactory.initElements(BaseDriver.driver, this);
+        PageFactory.initElements(BaseDriverParametres.driver, this);
     }
 
     @FindBy(xpath = "(//*[text()='Kurslar'])[1]")
